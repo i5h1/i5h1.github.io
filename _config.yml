@@ -1,26 +1,26 @@
 # Basic site info
-title:              "heiswayi nrird •••"
-description:        "Life Experience, Technology & Research"
-keywords:           "heiswayi nrird, personal blog, software engineer, life experience, technology and research"
-logo_text:          "Heiswayi Nrird"
+title:              "ishikawa nakamura •••"
+description:        "High tech, low life"
+keywords:           "technology"
+logo_text:          "Ishikawa Nakamura"
 show_tagline:       true # edit file in /_includes/tagline.html
 show_social_icons:  true # edit file in /_includes/social_links.html
 og_locale:          "en_US"
 cover:              "/assets/logo.png" # site image cover
 
 # Site URL settings
-url:                https://heiswayi.nrird.com # main url
+url:                https://i5h1.github.io # main url
 baseurl:            null # for gh-pages
-enforce_ssl:        heiswayi.nrird.com
-github_post_dir:    https://github.com/heiswayi/heiswayi.github.io/blob/master/
+enforce_ssl:        i5h1.github.io
+github_post_dir:    https://github.com/i5h1/i5h1.github.io/blob/master/
 
 # Site author info
 author:
-  name:             "Heiswayi Nrird"
-  email:            hnrird@gmail.com
-  github_username:  heiswayi
-  twitter_username: HeiswayiNrird
-  facebook_url:     https://www.facebook.com/heiswayi.nrird
+  name:             "Ishikawa Nakamura"
+  email:            ishi@gmail.com
+  github_username:  i5h1
+  twitter_username: none
+  facebook_url:     none
 
 # Disqus comment settings
 disqus_enabled:     false
@@ -35,7 +35,7 @@ destination:        ./_site
 permalink:          /:year/:title
 markdown:           kramdown
 highlighter:        rouge
-timezone:           Asia/Kuala_Lumpur
+timezone:           Europe/Berlin
 exclude:            ["README.md", "LICENSE.md", "CHANGELOG.md"]
 
 # Site configurations
