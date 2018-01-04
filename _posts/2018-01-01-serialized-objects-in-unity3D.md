@@ -2,9 +2,9 @@
 layout: post
 title: Serialized Objects inside Unity3D
 description: A quick look into serialization and serialized objects inside Unity-Technologies engine Unity3D
-keywords: Unity3D, Serialized-Objects
+keywords: Unity3D, Serialized-Objects, C#
 tags: [Unity3D, C#, Serialization, Documentation]
-comments: true
+comments: false
 ---
 
 ["Serialization is the automatic process of transforming data structures or object states into a format that Unity can store and reconstruct later."](https://docs.unity3d.com/Manual/script-Serialization.html)
@@ -13,7 +13,7 @@ Serialization is a basic feature of [.NET](https://docs.microsoft.com/en-us/dotn
 
 So serialization is performed to convert the state of an object into a form (Binary or XML) that can be saved or transported over the Network or over to different applications. 
 
-#### Here are some examples when Unity3D serializes data:
+#### Here are some examples of serialized data in Unity3D:
 
 + **Prefabs:** Internally, a perfab is the serialized data stream of one (or more) game objects as well as the components of it. The instance of a prefab is a list of modifications made to the prefab. It shows how the serialized data has to be modified to get the desired result.
 <br><br>
@@ -29,18 +29,18 @@ So serialization is performed to convert the state of an object into a form (Bin
 
 > Serialized Data from a typical Unity3D scene file: "perlin_vectorFields.unity" 
 
-## When does Unity3D serialize Objects?
+#### When exactly does Unity3D serialize Objects?
 
 Unity3D's full inner workings still remain a mistery, but this is taken from [Lucas Meijer](https://blogs.unity3d.com/author/lucas/) explaining it in a [post](https://blogs.unity3d.com/2014/06/24/serialization-in-unity/) on the official Unity3D-Blog. 
 
-##### Unity3D serializes the following type of objects:
+**Unity3D serializes the following type of objects:**
 
 + public or fields with the [SerializeField] attribute
 + Non static Fields
 + Non const Fields
 + Non readonly Fields
 
-##### The following can be serialized:
+**The following can be serialized:**
 
 + Custom non abstract classes with [[Serializable]](https://docs.unity3d.com/ScriptReference/Serializable.html) attribute
 + Custom structs with [[Serializable]](https://docs.unity3d.com/ScriptReference/Serializable.html) attribute. (new in Unity4.5)
@@ -49,13 +49,13 @@ Unity3D's full inner workings still remain a mistery, but this is taken from [Lu
 + Array of a fieldtype we can serialize
 + List<T> of a fieldtype we can serialize
 
-## What do I need to look out for when working with scripts that will be serialized?
+### What do I need to look out for when working with scripts that will be serialized?
 
-#### The Unity3D serialization system does not support null fields
+#### 1.Unity3D does not support serialization of null fields
 
 Whenever the serializer encounters a field that is null, it will automatically instantiate a new object of the same type and then serialize that. In this case however the serialized object will also be null and therefore the serializer will be stuck in an endless loop. **To counter the loop Unity3D has a serialization limit of seven levels.**
 
-#### Custom class'es behave the same way like struct's
+#### 2.Custom class'es behave the same way like struct's
 
 ```csharp 
 [Serializable]
@@ -70,7 +70,7 @@ class World : MonoBehaviour {
   ```
 > If the World class has an Animal array with three members, then you will find 3 objects inside the serialization-stream. 
 
-#### Custom polymorphic classes are not supported
+#### 3.Custom polymorphic classes are not supported
 
 If you are trying to serialize polymorphic class'es that do not inherit from ScriptableObject or MonoBehaviour it won't work, because Unity3D's serialization system doesn't support inheritance for custom serializable class'es. Here is a example:
 
@@ -128,9 +128,9 @@ When used the wrong way, these elements of Unity3D can lead to severe problems i
 
 <div class="divider"></div>
 
-## Test Example: 10.000 Objects
+#### Test Example: 10.000 Objects
 
-#### **Create:** 10.000 Objects manually
+**Create: 10.000 Objects manually**
 Create about 10.000 Objects manually by instantiating a base object and then by adding all the necessary components. 
 
 ```csharp
@@ -150,7 +150,7 @@ void CreateObjects() {
 }
 ```
 
-#### **Load:** 10.000 Objects from Prefab
+**Load: 10.000 Objects from Prefab**
 Instead of copying the data and recreating the hierarchy you can also just create a Prefab for it to load from it later on when you need it in your game.
 
 ```csharp
@@ -162,7 +162,7 @@ void LoadObjects() {
 }
 ```
 
-#### **Clone:** 10.000 Objects from a single Template
+**Clone: 10.000 Objects from a single Template**
 When creating multiple objects that all share specific preferences or are completely identical, then you can also create a template prefab, load it and then clone it.
 
 ```csharp
@@ -216,7 +216,7 @@ $$TotalTime = T_addComponent + T_spawnObject + T_reparenting + T_awakeCalls * n$
 | -- | ---------- | ----------------- | -------------- | ----------- | --------- |
 | Clone | 188 ms | 175 / 112 ms | 0 / 63 ms | 0 / 2 ms | 13 ms |
 
-#### Steps to improve load times and how to avoid unnecessary ones
+**Steps to improve load times and how to avoid unnecessary ones:**
 
 Better Game Content Structure - Example:
 
@@ -226,9 +226,9 @@ Dont put Object-Pools in another Transform -> Dont tidy up your project with tra
 
 <div class="divider"></div>
 
-# Animator performance & Transforms
+### Animator performance & Transforms
 
-### Optimize Game Object - Checkbox
+#### Optimize Game Object - Checkbox
 
 When you add character models with animations and a rig then Unity3D will create a Transform for every bone the character/model has -> this will create a lot of data that needs to be loaded and will slow down you game. To counter this go into the model-prefab -> to the Rig Tab and select "Optimize Game Object" -> This will only create a Transform for the Root-Bone. 
 
@@ -242,7 +242,7 @@ It will also reorder the mecanim animation data to make it more mulithreadable..
 
 <div class="divider"></div>
 
-# Unity3D User Interface Elements
+### Unity3D User Interface Elements
 #### *Creating smooth Interfaces*
 
 Canvas - Finds the best way to draw the components of your UI to the screen - batches these and sends them to the graphics card. If any one thing in the UI changes - any sprite/text/image - then the UI needs to recalculate all of its draw calls. It will take all of the UI objects and sorts them in the order like they are drawn by the graphics card - so the Canvas will be sorted by depth... 
@@ -255,9 +255,9 @@ The Problem: A lot of UI's consist of many different transforms/objects/... sort
 
 4 Fullscreen textures on top of each other -> every texture is going to be sampled -> quads are not culled
 
-## What to do against that?
+#### What to do against that?
 
-#### **Split up your UI into multiple Canvas'es**
+**Split up your UI into multiple Canvas'es**
 
 Seperate your UI into different sections and use a seperate Cavans for each of them - it is possible to nest a cavans within another canvas. This will make sure that everytime a object changes only the specific part gets redrawn & reordered so it can be send to the graphics card significantly faster. 
 
@@ -267,6 +267,6 @@ Those nested cavases isolate their children from rebuilds. So seperate you UI in
 > Background Canvas - *Updates once*<br>
 > Static Canvas - *Updates once and then never again*<br>
 
-#### **Combine Objets/Sprites/Text Elements**
+**Combine Objets/Sprites/Text Elements**
 
 Merge all of the objects you can in your UI. E.g.: If you create a table then dont create a TextObject for each column/line - create one text object and span it across the table
