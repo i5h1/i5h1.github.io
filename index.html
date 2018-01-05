@@ -38,6 +38,7 @@ title: Home
       <div class="post-list-date"><small>{{ post.date | date: "%b %d" }}</small></div>
 	    <div class="text-truncate"><a href="{{ post.url }}">{{ post.title }}</a></div>
       <div class="post-list-desc">{{ post.description }}</div>
+      <div class="post-list-tags">{{ post.tags }}</div>
     </div>
 
   {% endfor %}
