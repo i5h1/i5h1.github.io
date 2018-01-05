@@ -584,8 +584,10 @@ a.skip:hover {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    font-size: 70%;
+    font-size: 11.2px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+    margin-right: 4px;
+    font-family: 'Fira Sans', sans-serif;
 }
