@@ -13,6 +13,7 @@ url:                https://i5h1.github.io # main url
 baseurl:            null # for gh-pages
 enforce_ssl:        i5h1.github.io
 github_post_dir:    https://github.com/i5h1/i5h1.github.io/blob/master/
+relative_permalinks:  false
 
 # Site author info
 author:
