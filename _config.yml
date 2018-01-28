@@ -56,5 +56,6 @@ sass:
 gems:
   - jekyll-sitemap
 
-postindex:
-  tagcount:         3 # tags displayed in post index page
+postdisplay:
+  tagcount:         3 # max tags displayed in post index page
+  articletag:       "Article"

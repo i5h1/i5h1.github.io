@@ -9,9 +9,9 @@ comments: false
 
 ["Serialization is the automatic process of transforming data structures or object states into a format that Unity can store and reconstruct later."](https://docs.unity3d.com/Manual/script-Serialization.html)
 
-Serialization is a basic feature of [.NET](https://docs.microsoft.com/en-us/dotnet/standard/serialization/) applications and therefore at the very core of Unity3D (Still there is a difference between .NET serialization and Unity's serialization system). Everything in Unity3D gets serialized at one point or another. Every Object, Texture, Scene you Create, Instantiate, Copy, Delete, Edit gets serialized so it's current state can be saved and send to the Memory, Storage, Database, or else. 
+Serialization is a basic feature of [.NET](https://docs.microsoft.com/en-us/dotnet/standard/serialization/) applications and therefore at the very core of Unity3D, but there is still a difference between .NET serialization and Unity's serialization system. Why serialization is so important is simply explained by the fact that everything in Unity3D gets serialized at one point or another. Every Object, Texture, Scene you Create, Instantiate, Copy, Delete, Edit gets serialized so it's current state can be saved and send to the Memory, Storage, Database, or elsewhere for further processing. 
 
-So serialization is performed to convert the state of an object into a form (Binary or XML) that can be saved or transported over the Network or over to different applications. 
+So basically serialization is performed to convert the state of an object into a form (Binary or XML) that can be saved or transported over the Network or over to different applications. 
 
 #### Here are some examples of serialized data in Unity3D:
 
@@ -25,7 +25,7 @@ So serialization is performed to convert the state of an object into a form (Bin
 <br><br>
 + **Storing data:** which is stored in your scripts
 
-**TODO:** Insert picture of serialized data
+![Serialized Data header from a Unity3D scene](/res/2017-12-02-data-serialization-in-unity3d/img/serializedData.jpg)
 
 > Serialized Data from a typical Unity3D scene file: "perlin_vectorFields.unity" 
 
@@ -92,7 +92,7 @@ public class Child {
 
 Will produce the following result:
 
-**TODO:** Insert picture of inspector without polymorphism
+![Inspector Window](/res/2017-12-02-data-serialization-in-unity3d/img/inscNoPoly.jpg)
 
 > You will get a dropdown menu displaying the elements of the Child-object. You can even edit them.
 Changing the Child class so that it derives from Base will produce the following:
@@ -102,7 +102,7 @@ Changing the Child class so that it derives from Base will produce the following
 public class Child : Base
 ```
 
-**TODO:** Insert picture of inspector with polymorphism
+![Inspector Window](/res/2017-12-02-data-serialization-in-unity3d/img/inscWithPoly.jpg)
 
 > The inspector is not able the retrieve the value anymore as the Unity3D's serialization system can't resolve the polymorphic classes used in this example. The example was taken from the following StackExchange post: ["Unity Inspector Not Showing Serialized Variables Of Child"](https://gamedev.stackexchange.com/questions/98994/unity-inspector-not-showing-serialized-variables-of-child/99000#99000). It took it, because it was a pretty good example.
 
@@ -229,6 +229,8 @@ Dont put Object-Pools in another Transform -> Dont tidy up your project with tra
 ### Animator performance & Transforms
 
 #### Optimize Game Object - Checkbox
+
+![Optimize Game Object Checkbox](/res/2017-12-02-data-serialization-in-unity3d/img/optimizeGameObject.jpg)
 
 When you add character models with animations and a rig then Unity3D will create a Transform for every bone the character/model has -> this will create a lot of data that needs to be loaded and will slow down you game. To counter this go into the model-prefab -> to the Rig Tab and select "Optimize Game Object" -> This will only create a Transform for the Root-Bone. 
 
